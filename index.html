@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video to Audio Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        background-image: url(https://media.istockphoto.com/id/184916983/photo/blank-time-code-movie-slate-on-set.jpg?s=2048x2048&w=is&k=20&c=58k5Uf6zM5XXuTR30xLle6h_bINy7tCfNdZNFjAs0Ug=); 
+
+
+
+ }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        #downloadLink {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Video to Audio Converter</h1>
+        <input type="file" id="videoFile" accept="video/*">
+        <label for="videoFile">Choose a video file</label>
+        <div id="result"></div>
+        <a id="downloadLink" href="#" download="audio.mp3">Download Audio</a>
+    </div>
+
+    <script>
+        const videoFileInput = document.getElementById('videoFile');
+        const resultDiv = document.getElementById('result');
+        const downloadLink = document.getElementById('downloadLink');
+
+        videoFileInput.addEventListener('change', function() {
+            const file = this.files[0];
+
+            if (file) {
+                const videoUrl = URL.createObjectURL(file);
+
+                const audio = new Audio();
+                audio.src = videoUrl;
+                audio.controls = true;
+
+                resultDiv.innerHTML = '';
+                resultDiv.appendChild(audio);
+
+                // Enable download link
+                downloadLink.href = videoUrl;
+                downloadLink.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
